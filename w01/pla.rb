@@ -1,7 +1,6 @@
 require 'matrix'
 require 'pp'
 require 'csv'
-require 'pry'
 
 class SampleLine
   attr_reader :a, :b
@@ -94,18 +93,21 @@ end
 
 avg = 0
 test = 0
-total = 1000
+total = 1
 (1..total).each do |i|
   sample = SampleLine.new
   points = sample.random_points(10)
-  # CSV.open("points.dat", "wb", col_sep: " ") do |csv|
-  #   points.each{|point| csv << point}
-  # end
+  CSV.open("points.dat", "wb", col_sep: " ") do |csv|
+    points.each{|point| csv << point}
+  end
   pla = Pla.new(points)
   avg += pla.training
   validations = sample.random_points(1000)
   test += pla.check(validations)
-  # p sample.get_ab
+  line = sample.get_ab
+  w = pla.w
+  File.write("line.dat", line.first.to_s + " " + line.last.to_s)
+  File.write("w.dat", w.to_a.join(" "))
   # p points
   # p pla.w
 end
