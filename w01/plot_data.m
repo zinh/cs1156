@@ -3,7 +3,7 @@ X1 = [];
 X2 = [];
 Y1 = [];
 Y2 = [];
-data = load("points.dat");
+data = load('points.dat');
 [row, col] = size(data);
 for num_row = 1:row
   row = data(num_row,:);
@@ -16,8 +16,8 @@ for num_row = 1:row
   end
 end;
 
-line = load("line.dat");
-w = load("w.dat");
+line = load('line.dat');
+w = load('w.dat');
 a = line(1);
 b = line(2);
 a1 = -w(2) / w(3);
